@@ -12,7 +12,6 @@
 
 <template>
   <section>
-    <p>고지리 체크리스트</p>
     <GojiriCheckList />
   </section>
 </template>
