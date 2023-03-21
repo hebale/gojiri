@@ -1,0 +1,12 @@
+.gojiri {
+  header {
+    display: flex;
+    padding: 15px 0;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;    
+    ul {
+      padding: 0 12px;
+    }
+  }
+}
