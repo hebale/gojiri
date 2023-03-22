@@ -1,12 +1,55 @@
 .gojiri {
   header {
     display: flex;
-    padding: 15px 0;
-    justify-content: center;
+    padding: 15px 0;    
+    flex-direction: column;
     align-items: center;
-    border-bottom: 1px solid #ccc;    
-    ul {
+    border-bottom: 1px solid #ccc;
+
+    .year {
+      font-weight: 600;
+    }    
+
+    .splide {
+      position: relative;
       padding: 0 12px;
+      margin-top: 12px;
+      .splide__track {
+        position: relative;
+        overflow: hidden;
+        .splide__slide {
+          &.is-active {
+            border: 1px solid rgba(255, 0, 0, 0.5);
+          }
+        }
+      }
+
+      .prev,
+      .next {
+        z-index: 1;
+        position: absolute;        
+        top: 0;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 0, 0, 0.5);
+      }
+      .prev {
+        left: 0;
+      }
+      .next {
+        right: 0;
+      }
+      .splide__sr {
+        display: none;
+      }
+      ul {
+        width: 200px;
+        white-space: nowrap;
+        li { 
+          display: inline-block;
+          text-align: center;
+        }
+      }
     }
   }
 }
