@@ -9,46 +9,61 @@
     .year {
       font-weight: 600;
     }    
-
-    .splide {
+ 
+    .flicking-viewport {
       position: relative;
-      padding: 0 12px;
+      height: 42px;
       margin-top: 12px;
-      .splide__track {
-        position: relative;
-        overflow: hidden;
-        .splide__slide {
-          &.is-active {
-            border: 1px solid rgba(255, 0, 0, 0.5);
+      overflow: hidden;
+
+      ul.flicking-camera {
+        width: 200px;
+        white-space: nowrap;
+        li { 
+          display: inline-block;
+          text-align: center;
+          button {
+            width: 42px;
+            height: 42px;  
+            font-size: 12px;     
+            border-radius: 50%;
+            border: 1px solid rgb($SecondaryColorCode);
+            background-color: rgb($PrimaryColorCode);
+            color: rgb($SecondaryColorCode);
+          } 
+          
+          &.active {
+            button {
+              font-size: 20px;
+              font-weight: 600;
+              background-color: rgb($SecondaryColorCode);
+              color: rgb($PrimaryColorCode);
+            }
           }
         }
       }
 
       .prev,
       .next {
+        text-indent: -9999px;
         z-index: 1;
         position: absolute;        
         top: 0;
-        width: 50px;
-        height: 50px;
-        background: rgba(255, 0, 0, 0.5);
+        width: 60px;
+        height: 100%;        
+        border: none;
+        background-color: rgba(0 0 0 / 0);
       }
       .prev {
         left: 0;
+        background-image: linear-gradient(to left, rgba(0 0 0 / 0) 0%, rgba(12 16 18 / 1) 100%);
       }
       .next {
         right: 0;
+        background-image: linear-gradient(to right, rgba(0 0 0 / 0) 0%, rgba(12 16 18 / 1) 100%);
       }
       .splide__sr {
         display: none;
-      }
-      ul {
-        width: 200px;
-        white-space: nowrap;
-        li { 
-          display: inline-block;
-          text-align: center;
-        }
       }
     }
   }

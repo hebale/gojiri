@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import VueSplide from '@splidejs/vue-splide';
+import Flicking from '@egjs/vue3-flicking';
 
 const app = createApp(App);
 
-app.use(VueSplide);
+app.use(Flicking);
 app.mount('#app');

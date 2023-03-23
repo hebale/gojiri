@@ -1,9 +1,9 @@
 <script>
-  import GojiriCheckList from '../components/GojiriCheckList.vue';
+  import GoCard from '../components/Go-Card.vue';
 
   export default {
     components: {
-      GojiriCheckList
+      GoCard
     },
     setup(){
     }
@@ -12,7 +12,7 @@
 
 <template>
   <section>
-    <GojiriCheckList />
+    <GoCard />
   </section>
 </template>
 

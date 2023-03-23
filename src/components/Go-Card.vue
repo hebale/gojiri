@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="card-list">
+  <div class="card">
     <header>
       <button type="button">버튼</button>
       <div>

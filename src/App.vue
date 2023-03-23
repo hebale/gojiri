@@ -1,16 +1,16 @@
 
 <script>
-  import GojiriHeader from './layout/GojiriHeader.vue';
-  import GojiriBody from './layout/GojiriBody.vue';
-  import GojiriConfirm from './components/GojiriConfirm.vue';
-  import GojiriDatePicker from './components/GojiriDatePicker.vue';
+  import GoHeader from './layout/Go-Header.vue';
+  import GoContents from './layout/Go-Contents.vue';
+  import GoConfirm from './components/Go-Confirm.vue';
+  import GoDatepicker from './components/Go-Datepicker.vue';
 
   export default {
     components: {
-      GojiriHeader,
-      GojiriBody,
-      GojiriConfirm,
-      GojiriDatePicker
+      GoHeader,
+      GoContents,
+      GoConfirm,
+      GoDatepicker
     },
     mounted(){
       this.$nextTick(() => console.log('loaded'))
@@ -20,11 +20,11 @@
 
 <template>
   <main class="gojiri">
-    <GojiriHeader />
-    <GojiriBody />
+    <GoHeader />
+    <GoContents />
 
-    <GojiriConfirm />
-    <GojiriDatePicker />
+    <GoConfirm />
+    <GoDatepicker />
   </main>
 </template>
 
