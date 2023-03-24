@@ -2,69 +2,81 @@
   import { onMounted, ref } from 'vue';
   import { getMonth, getYear } from 'date-fns';
   import Flicking from '@egjs/vue3-flicking';
-  import { Perspective } from '@egjs/flicking-plugins';
 
   export default {
     components: {
       Flicking
     },    
     data() {
-      return {
+      return {        
+        today: { 
+          year: getYear(new Date),
+          month: getMonth(new Date)
+        },
+        currentCount: getMonth(new Date) + 1,
         FlickingOptions: {
           defaultIndex: getMonth(new Date),
           panelsPerView: 3,
           circular: true,
           align: 'center',          
-          duration: 500,
+          duration: 800,
           moveType: 'snap',
           interruptable: true,
           preventClickOnDrag: true,
           autoResize: true,
           preventEventsBeforeInit: true,
-        },
-        // plugins: [
-        //   new Perspective({ 
-        //     seletor: 'active',
-        //     scale: 0.8,
-        //     rotate: 0,
-        //   })
-        // ]
+        }
       }
     },
-    methods: {       
-      slideMove(event) {        
-        event.currentTarget.panels.forEach(panel => {
-          const progress = Math.abs(panel.progress.toFixed(2));
 
-          if (progress < 1.5) {
-            panel.element.style.transform = `scale(${Math.max(0.7, 1 - (progress / 2.1))})`
-          } else {
-            panel.element.style.transform = `scale(0.7)`
-          }
-
-          if (progress < 0.2) {
-            panel.element.classList.add('active')
-          } else {
-            panel.element.classList.remove('active')
-          }
-        })
+    methods: {
+      ready(event) {
+        this.motionTransform(event);
       },
       slideToPrev() {
         this.$refs.flicking.prev();
       },
       slideToNext(){
         this.$refs.flicking.next();
+      },
+      motionTransform(event) {
+        event.currentTarget.panels.forEach(panel => {
+          const progress = Math.abs(panel.progress.toFixed(2));
+          // motion
+          if (progress < 1.5) {
+            panel.element.style.fontSize = `${Math.max(16, 24 - (progress * 10))}px`;
+            panel.element.style.transform = `scale(${Math.max(0.7, 1 - (progress / 2.1))})`;
+          } else {
+            panel.element.style.fontSize = '16px';
+            panel.element.style.transform = 'scale(0.7)';
+          }
+
+          // active
+          if (progress < 0.2) {
+            panel.element.classList.add('active')
+          } else {
+            panel.element.classList.remove('active')
+          }
+        })
+
+        // counting
+        const direction = event.direction;
+        const nowValue = event.currentTarget.panels
+          .filter(panel => Math.abs(panel.progress.toFixed(2)) < 0.9)[0]
+          ?.element.innerText;
+
+        if (direction === 'PREV' && this.currentCount < parseInt(nowValue)) {
+          this.today.year -= 1;
+        } 
+        if (direction === 'NEXT' && this.currentCount > parseInt(nowValue)) {
+          this.today.year += 1;
+        }
+        this.currentCount = parseInt(nowValue);        
       }
     },
 
     setup() {
-      const today = ref({ 
-        year: getYear(new Date),
-        month: getMonth(new Date)
-      });
-
       const flicking = ref();
-
       onMounted(() => {
         if (flicking.value && flicking.value.flicking) {
           console.log(flicking.value.flicking)
@@ -72,7 +84,6 @@
       });
 
       return {
-        today,
         flicking,
       };
     },
@@ -88,7 +99,8 @@
       :cameraTag="'ul'"
       :plugins="plugins"
 
-      @move="slideMove"
+      @ready="ready"
+      @move="motionTransform"
     >
       <li v-for="(value, index) in 12" :key="`slide_${ index }`" >
         <button type="button">{{ value }}</button>
