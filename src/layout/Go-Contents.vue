@@ -12,7 +12,9 @@
 
 <template>
   <section>
-    <GoCard />
+    <div class="card-wrap">
+      <GoCard />
+    </div>
   </section>
 </template>
 

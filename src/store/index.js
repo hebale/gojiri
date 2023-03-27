@@ -4,6 +4,10 @@ export default Vuex.createStore({
   state: {},
   getters: {},
   mutations: {},
-  actions: {},
+  actions: {
+    getFixedSpendList(state, payload) {
+      console.log(state, payload);
+    }
+  },
   modules: {}
 })

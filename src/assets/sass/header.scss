@@ -4,18 +4,15 @@
     padding: 24px 0 12px;    
     flex-direction: column;
     align-items: center;
-    
     .year {
       font-size: 14px;
     }
-
     .flicking-viewport {
       position: relative;
       width: 160px;
       height: 50px;
       margin-top: 12px;
       overflow: hidden;
-
       ul.flicking-camera {
         width: 200px;
         white-space: nowrap;
@@ -34,7 +31,6 @@
             color: rgb($SecondaryColorCode);
             transition: background-color 600ms, color 600ms;
           } 
-          
           &.active {
             button {
               font-weight: 600;
@@ -44,7 +40,6 @@
           }
         }
       }
-
       .prev,
       .next {
         text-indent: -9999px;

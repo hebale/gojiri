@@ -13,7 +13,7 @@
           year: getYear(new Date),
           month: getMonth(new Date)
         },
-        currentCount: getMonth(new Date) + 1,
+        selectedMonth: getMonth(new Date) + 1,
         FlickingOptions: {
           defaultIndex: getMonth(new Date),
           panelsPerView: 3,
@@ -32,6 +32,13 @@
     methods: {
       ready(event) {
         this.motionTransform(event);
+        this.changed();
+      },
+      changed() {
+        this.$store.dispatch(
+          'getFixedSpendList',
+          { date: `${this.today.year}-${this.selectedMonth}` }  
+        );
       },
       slideToPrev() {
         this.$refs.flicking.prev();
@@ -65,13 +72,13 @@
           .filter(panel => Math.abs(panel.progress.toFixed(2)) < 0.9)[0]
           ?.element.innerText;
 
-        if (direction === 'PREV' && this.currentCount < parseInt(nowValue)) {
+        if (direction === 'PREV' && this.selectedMonth < parseInt(nowValue)) {
           this.today.year -= 1;
         } 
-        if (direction === 'NEXT' && this.currentCount > parseInt(nowValue)) {
+        if (direction === 'NEXT' && this.selectedMonth > parseInt(nowValue)) {
           this.today.year += 1;
         }
-        this.currentCount = parseInt(nowValue);        
+        this.selectedMonth = parseInt(nowValue);        
       }
     },
 
@@ -82,7 +89,6 @@
           console.log(flicking.value.flicking)
         }
       });
-
       return {
         flicking,
       };
@@ -97,10 +103,10 @@
       ref="flicking"
       :options="FlickingOptions"
       :cameraTag="'ul'"
-      :plugins="plugins"
 
       @ready="ready"
       @move="motionTransform"
+      @changed="changed"
     >
       <li v-for="(value, index) in 12" :key="`slide_${ index }`" >
         <button type="button">{{ value }}</button>
