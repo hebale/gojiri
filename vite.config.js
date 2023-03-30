@@ -10,6 +10,9 @@ export default (({command, mode}) => {
   return defineConfig({
     base: './',
     assetsInclude: ['./assets'], 
+    build: {
+      outDir: 'public'
+    },
     plugins: [vue()],
     resolve: {
       alias: {
