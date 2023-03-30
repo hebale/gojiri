@@ -9,7 +9,7 @@ export default (({command, mode}) => {
   
   return defineConfig({
     base: './',
-    assetsInclude: ['./assets'],
+    assetsInclude: ['./assets'], 
     plugins: [vue()],
     resolve: {
       alias: {
