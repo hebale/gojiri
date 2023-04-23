@@ -1,16 +1,12 @@
 
 <script>
-  import GoHeader from './layout/Go-Header.vue';
-  import GoContents from './layout/Go-Contents.vue';
-  import GoConfirm from './components/Go-Confirm.vue';
-  import GoDatepicker from './components/Go-Datepicker.vue';
+  import FlickHeader from './layout/FlickHeader.vue';
+  import ContentsBody from './layout/ContentsBody.vue';
 
   export default {
     components: {
-      GoHeader,
-      GoContents,
-      GoConfirm,
-      GoDatepicker
+      FlickHeader,
+      ContentsBody
     },
     mounted(){
       this.$nextTick(() => console.log('loaded'))
@@ -20,14 +16,11 @@
 
 <template>
   <main class="gojiri">
-    <GoHeader />
-    <GoContents />
-
-    <GoConfirm />
-    <GoDatepicker />
+    <FlickHeader />
+    <ContentsBody />
   </main>
 </template>
 
 <style lang='sass'>
-@import './assets/sass/style.scss'
+@import './assets/scss/style.scss'
 </style>

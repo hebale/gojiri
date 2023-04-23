@@ -1,0 +1,12 @@
+// color code
+$assetPath: '/src/assets';
+$PrimaryColorCode: 12 16 18;
+$SecondaryColorCode: 180 233 0;
+$PointColorCode: 243 77 77;
+
+@import './import/reset.scss';
+@import './import/header.scss';
+@import './import/layout.scss';
+@import './import/card.scss';
+@import './import/modal.scss';
+@import './import/list.scss';

@@ -9,7 +9,7 @@
     },    
     data() {
       return {        
-        today: { 
+        now: { 
           year: getYear(new Date),
           month: getMonth(new Date)
         },
@@ -36,8 +36,11 @@
       },
       changed() {
         this.$store.dispatch(
-          'getFixedSpendList',
-          { date: `${this.today.year}-${this.selectedMonth}` }  
+          'testCall',
+          { 
+            method: 'GET',
+            date: `${this.now.year}-${this.selectedMonth}`
+          }  
         );
       },
       slideToPrev() {
@@ -73,10 +76,10 @@
           ?.element.innerText;
 
         if (direction === 'PREV' && this.selectedMonth < parseInt(nowValue)) {
-          this.today.year -= 1;
+          this.now.year -= 1;
         } 
         if (direction === 'NEXT' && this.selectedMonth > parseInt(nowValue)) {
-          this.today.year += 1;
+          this.now.year += 1;
         }
         this.selectedMonth = parseInt(nowValue);        
       }
@@ -98,7 +101,7 @@
 
 <template>
   <header>
-    <p class="year">{{ today.year }}</p>
+    <p class="year">{{ now.year }}</p>
     <Flicking
       ref="flicking"
       :options="FlickingOptions"

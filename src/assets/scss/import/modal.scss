@@ -1,0 +1,39 @@
+.gojiri {
+  .dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    .modal {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 220px;
+      min-height: 140px;
+      border-radius: 8px;
+      border: 1px solid rgb($SecondaryColorCode);
+      background: rgb($PrimaryColorCode);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      p {
+        padding: 32px 24px 0;
+        b {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+      div {
+        padding: 12px 24px 26px;
+        button {
+          & + button {
+            margin-left: 12px;
+          }
+        }
+      }
+    }
+  }
+}

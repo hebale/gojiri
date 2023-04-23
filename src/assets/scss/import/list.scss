@@ -30,6 +30,9 @@
         & + li {
           margin-top: 12px;  
         }
+        &.edit .list label:before {
+          display: none;
+        }
       }
     }
   }

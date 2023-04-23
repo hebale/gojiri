@@ -3,7 +3,7 @@
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
-  src: local('Pretendard Variable'), url('../font/Pretendard-Variable.woff2') format('woff2-variations');
+  src: local('Pretendard Variable'), url('#{$assetPath}/fonts/PretendardVariable.woff2') format('woff2-variations');
 }
 
 html {
@@ -21,7 +21,7 @@ body {
 }
 
 main {
-  display: block;  
+  display: block;
 }
 
 ul, ol {
