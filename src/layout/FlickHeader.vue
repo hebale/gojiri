@@ -62,13 +62,8 @@
         event.currentTarget.panels.forEach(panel => {
           const progress = Math.abs(panel.progress.toFixed(2));
           
-          if (progress < 1.5) {
-            panel.element.style.fontSize = `${Math.max(16, 24 - (progress * 10))}px`;
-            panel.element.style.transform = `scale(${Math.max(0.7, 1 - (progress / 2.1))})`;
-          } else {
-            panel.element.style.fontSize = '16px';
-            panel.element.style.transform = 'scale(0.7)';
-          };
+          panel.element.style.fontSize = `${Math.max(16, 24 - (progress * 10))}px`;
+          panel.element.style.transform = `scale(${Math.max(0.7, 1 - (progress / 2.1))})`;
 
           if (progress < 0.2) {
             panel.element.classList.add('active')

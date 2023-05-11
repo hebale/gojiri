@@ -34,7 +34,7 @@
             border: 1px solid #b4e900;
             background-color: rgb($PrimaryColorCode);
             color: #b4e900;
-            transition: background-color 600ms, color 600ms;
+            // transition: background-color 600ms, color 600ms;
           } 
           &.active {
             button {
