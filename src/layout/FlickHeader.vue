@@ -30,11 +30,11 @@
           circular: true,
           align: 'center',          
           duration: 450,
-          moveType: 'snap',
-          interruptable: true,
+          // moveType: 'snap',
+          // interruptable: true,
           preventClickOnDrag: true,
-          autoResize: true,
-          preventEventsBeforeInit: true,
+          // autoResize: true,
+          // preventEventsBeforeInit: true,
         }
       }
     },
