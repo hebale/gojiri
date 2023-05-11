@@ -62,8 +62,8 @@
         event.currentTarget.panels.forEach(panel => {
           const progress = Math.abs(panel.progress.toFixed(2));
           
-          panel.element.style.fontSize = `${Math.max(16, 24 - (progress * 10))}px`;
           panel.element.style.transform = `scale(${Math.max(0.7, 1 - (progress / 2.1))})`;
+          panel.element.querySelector('span').style.fontSize =`${Math.max(16, 24 - (progress * 10))}px`;
 
           if (progress < 0.2) {
             panel.element.classList.add('active')
@@ -106,7 +106,7 @@
       @changed="changed"
     >
       <li v-for="(value, index) in 12" :key="`slide_${ index }`" >
-        <button type="button">{{ value }}</button>
+        <button type="button"><span>{{ value }}</span></button>
       </li>
       <template #viewport>
         <button type="button" class="prev" @click="slideToPrev">이전</button>

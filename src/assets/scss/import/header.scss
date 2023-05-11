@@ -27,15 +27,20 @@
           transform-origin: 50% 50%;
           vertical-align: middle;
           button {
+            position: relative;
             width: 50px;
-            height: 50px;  
-            font-size: inherit;     
+            height: 50px; 
             border-radius: 50%;
             border: 1px solid #b4e900;
             background-color: rgb($PrimaryColorCode);
             color: #b4e900;
             transition: background-color 400ms, color 400ms;
-            text-align: center;
+            span {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
           } 
           &.active {
             button {
