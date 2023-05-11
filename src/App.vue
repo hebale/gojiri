@@ -9,15 +9,15 @@
       ContentsBody
     },
     mounted(){
-      this.$nextTick(() => console.log('loaded'))
+      // this.$nextTick(() => console.log('loaded'))
     }
   }
 </script>
 
 <template>
   <main class="gojiri">
-    <FlickHeader />
-    <ContentsBody />
+    <flick-header />
+    <contents-body />
   </main>
 </template>
 

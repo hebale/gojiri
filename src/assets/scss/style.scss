@@ -1,12 +1,26 @@
 // color code
 $assetPath: '/src/assets';
 $PrimaryColorCode: 12 16 18;
-$SecondaryColorCode: 180 233 0;
+$SecondaryColorCode: #b4e900;
 $PointColorCode: 243 77 77;
+
+@mixin scrollbar-default {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 20px
+  }
+  ::-webkit-scrollbar-track {
+    background-color: darkblue;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: black;
+  }
+}
 
 @import './import/reset.scss';
 @import './import/header.scss';
 @import './import/layout.scss';
 @import './import/card.scss';
+@import './import/item.scss';
 @import './import/modal.scss';
-@import './import/list.scss';

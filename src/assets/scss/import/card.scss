@@ -1,7 +1,7 @@
 .gojiri {
   .card-wrap {
     position: relative;
-    padding: 36px 10px 36px 0;
+    padding: 28px 10px 56px;
     margin: 0 auto;
     height: 100%;
     max-width: 640px;
@@ -21,42 +21,147 @@
       border-radius: 10px
     }
   }
-  
   .card {
-    padding: 12px 14px 24px;
-    border: 1px solid rgb($SecondaryColorCode);
+    border: 1px solid #b4e900;
     border-radius: 16px;
     box-shadow: 6px 6px 20px -14px rgb(180 233 0 / 0.8);
-    > header {
-      position: relative;
-      display: flex;
-      padding-bottom: 10px;
-      &::after {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -1px;
-        height: 1px;
-        background-color: rgb($SecondaryColorCode);
-      }
-      input {
-        padding: 0;
-        font-size: 16px;
-        color: #fff;
-        &[type='text'] {
-          min-width: 100px;
-          width: auto;
+    overflow: hidden;
+    .inner {
+      padding: 2px 10px 14px;
+      > header {
+        position: relative;
+        padding-bottom: 2px;
+        &:after {
+          content: "";
+          display: inline-block;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -1px;
+          height: 1px;
+          background-color: #b4e900;
+          opacity: 0.4;
+        }
+        input {
+          padding: 0;
+          font-size: 14px;
+          color: #fff;
+          &[type='text'] {
+            min-width: 100px;
+            width: auto;
+          }
+        }
+        h2 {
+          display: inline-flex;
+          width: calc(100% - 80px);
+          padding: 0 16px 0 6px;
+          margin: 0 auto;
+          box-sizing: border-box;
+          align-items: center;
+          label {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+          }
+          input[type="checkbox"] {
+            &.indeterminate + span {
+              background: #b4e900;
+              &:after {
+                display: inline-block;
+                transform: translate(-50%, -50%);
+              }
+            }
+          }
+          input[type="text"] {
+            flex: 1;
+            margin-right: 24px;
+          }
+          button {
+            padding: 2px 8px;
+            margin-left: auto;
+            border-radius: 2px;
+            color: #303030;
+            background: #b4e900;
+            white-space: nowrap;
+          }
+        }
+        > button {
+          text-indent: -9999px;
+          position: relative;
+          width: 40px;
+          height: 40px;
+          border: none;
+          overflow: hidden;
+          &:before,
+          &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 2px;
+            border-radius: 2px;
+            background: #b4e900;
+          }
+        }
+        .view-btn {
+          float: left;
+          transform-origin: 50% 50%;
+          transition: transform 350ms;
+          overflow: hidden;
+          &:before,
+          &:after {
+            width: 12px;
+            transform-origin: 100% 50%;
+          }
+          &:before {
+            transform: translate(-11px, 4px) rotate(45deg);
+          }
+          &:after {
+            transform: translate(-12px, 4px) rotate(135deg);
+          }
+          &.active {
+            transform: rotate(-180deg);
+          }
+        }
+        .delete-btn {
+          float: right;
+          &:before,
+          &:after {
+            width: 22px;
+            transform-origin: 50% 50%;
+          }
+          &:before {
+            transform: translate(-50%, -50%) rotate(-45deg);
+          }
+          &:after {
+            transform: translate(-50%, -50%) rotate(45deg);
+          }
         }
       }
-      h2 {
-        margin: 0 auto;
+    }
+    & + .card {
+      margin-top: 18px;
+    }
+  }
+  .card-control {
+    padding: 0 16px;
+    margin-top: 26px;
+    &.single {
+      padding: 0;
+      button {
+        padding: 12px 0;
       }
     }
-    > button {}
-    & + .card {
-      margin-top: 30px;
+    button {
+      padding: 24px 0;
+      width: 100%;
+      border-radius: 8px;
+      & + button {
+        margin-top: 16px;
+      }
     }
   }
 }

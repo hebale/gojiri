@@ -1,12 +1,22 @@
 <script>
   import { onMounted, ref } from 'vue';
   import { getMonth, getYear } from 'date-fns';
-  import Flicking from '@egjs/vue3-flicking';
+  import FlickingComp from '@egjs/vue3-flicking';
 
   export default {
     components: {
-      Flicking
-    },    
+      FlickingComp
+    },  
+    setup() {
+      const flicking = ref();
+      onMounted(() => {
+        if (flicking.value && flicking.value.flicking) {
+          console.log(flicking.value.flicking);
+        }
+      });
+      
+      return { flicking };
+    },  
     data() {
       return {        
         now: { 
@@ -14,12 +24,12 @@
           month: getMonth(new Date)
         },
         selectedMonth: getMonth(new Date) + 1,
-        FlickingOptions: {
+        flickingOptions: {
           defaultIndex: getMonth(new Date),
           panelsPerView: 3,
           circular: true,
           align: 'center',          
-          duration: 800,
+          duration: 450,
           moveType: 'snap',
           interruptable: true,
           preventClickOnDrag: true,
@@ -28,20 +38,19 @@
         }
       }
     },
-
     methods: {
       ready(event) {
         this.motionTransform(event);
         this.changed();
       },
       changed() {
-        this.$store.dispatch(
-          'testCall',
-          { 
-            method: 'GET',
-            date: `${this.now.year}-${this.selectedMonth}`
-          }  
-        );
+        const year = this.now.year;
+        const month = this.selectedMonth.length > 1
+          ? this.selectedMonth
+          : `0${this.selectedMonth}`;
+
+        this.$store.commit('SET_DATE', { year, month });
+        this.$store.dispatch('updateData');
       },
       slideToPrev() {
         this.$refs.flicking.prev();
@@ -52,24 +61,22 @@
       motionTransform(event) {
         event.currentTarget.panels.forEach(panel => {
           const progress = Math.abs(panel.progress.toFixed(2));
-          // motion
+          
           if (progress < 1.5) {
             panel.element.style.fontSize = `${Math.max(16, 24 - (progress * 10))}px`;
             panel.element.style.transform = `scale(${Math.max(0.7, 1 - (progress / 2.1))})`;
           } else {
             panel.element.style.fontSize = '16px';
             panel.element.style.transform = 'scale(0.7)';
-          }
+          };
 
-          // active
           if (progress < 0.2) {
             panel.element.classList.add('active')
           } else {
             panel.element.classList.remove('active')
-          }
-        })
+          };
+        });
 
-        // counting
         const direction = event.direction;
         const nowValue = event.currentTarget.panels
           .filter(panel => Math.abs(panel.progress.toFixed(2)) < 0.9)[0]
@@ -77,34 +84,26 @@
 
         if (direction === 'PREV' && this.selectedMonth < parseInt(nowValue)) {
           this.now.year -= 1;
-        } 
+        };
+
         if (direction === 'NEXT' && this.selectedMonth > parseInt(nowValue)) {
           this.now.year += 1;
-        }
+        };
         this.selectedMonth = parseInt(nowValue);        
       }
-    },
-
-    setup() {
-      const flicking = ref();
-      onMounted(() => {
-        if (flicking.value && flicking.value.flicking) {
-          console.log(flicking.value.flicking)
-        }
-      });
-      return {
-        flicking,
-      };
-    },
+    }
   }
 </script>
 
 <template>
   <header>
+    <h1>
+      <a href="/"><img src="" alt="">고지리</a>
+    </h1>
     <p class="year">{{ now.year }}</p>
-    <Flicking
+    <flicking-comp
       ref="flicking"
-      :options="FlickingOptions"
+      :options="flickingOptions"
       :cameraTag="'ul'"
 
       @ready="ready"
@@ -118,6 +117,6 @@
         <button type="button" class="prev" @click="slideToPrev">이전</button>
         <button type="button" class="next" @click="slideToNext">다음</button>
       </template>
-    </Flicking>
+    </flicking-comp>
   </header>
 </template>

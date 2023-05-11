@@ -1,5 +1,6 @@
 .gojiri {
   .dim {
+    z-index: 100;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,25 +13,124 @@
       position: absolute;
       top: 50%;
       left: 50%;
+      padding: 0 24px;
       min-width: 220px;
       min-height: 140px;
       border-radius: 8px;
-      border: 1px solid rgb($SecondaryColorCode);
+      border: 1px solid #b4e900;
       background: rgb($PrimaryColorCode);
       transform: translate(-50%, -50%);
       text-align: center;
-      p {
-        padding: 32px 24px 0;
-        b {
-          display: inline-block;
-          width: 100%;
+      .error {
+        display: inline-block;
+        padding: 12px 0;
+        width: 100%;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .body{
+        input {
+          padding: 4px 12px;
+          margin-top: 8px;
+          border: 1px solid #b4e900;
+          font-size: 14px;
+          color: #fff;
+          background: #23271f;
+        }
+        p {
+          padding: 0 24px;
+          b {
+            display: inline-block;
+            width: 100%;
+          }
         }
       }
-      div {
+      .control {
         padding: 12px 24px 26px;
         button {
           & + button {
             margin-left: 12px;
+          }
+        }
+      }
+
+      .picker-wrap {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        [class*="-module"] {
+          p {
+            margin-bottom: 6px;
+            font-size: 12px;
+          }
+          > div {
+            position: relative;
+            display: flex;
+            padding: 0 8px;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+          }
+          & + [class*="-period"] {
+            margin-left: auto;
+          }
+        }
+        p {
+          padding: 0;
+          white-space: nowrap;
+        }
+        .picker {
+          position: relative;
+          padding: 0 8px;
+          height: 100%;
+          overflow: hidden;
+          li {
+            width: 100%;
+            line-height: 20px;
+            font-size: 14px;
+          }
+          & + .picker {
+            margin-left: 8px;
+          }
+        }
+        .guide-line {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 22px;
+          border-top: 1px solid #b4e900;
+          border-bottom: 1px solid #b4e900;
+          transform: translateY(-50%);
+        }
+        .dim-top, 
+        .dim-bottom {
+          position: absolute;
+          left: 0;
+          right: 0;
+          height: 38px;
+          background: #0c1012;
+          opacity: 0.65;
+        }
+        .dim-top {
+          top: 0;
+        }
+        .dim-bottom {
+          bottom: 0;
+        }
+        .month-module {
+          .picker {
+            li {
+              line-height: 24px;
+              font-size: 16px;
+            }
+          }
+          .guide-line {
+            height: 26px;
+          }
+          .dim-top,
+          .dim-bottom {
+            height: 36px;
           }
         }
       }

@@ -2,167 +2,64 @@ import Vuex from 'vuex';
 
 export default Vuex.createStore({
   state: {
-    data: null
+    data: null,
+    year: null,
+    month: null,
+    yearRange: Array(100).fill(0).map((_, index) => index + 1991),
+    monthRange: Array(12).fill(0).map((_, index) => index + 1),
+    sub: [],
+    period: []
   },
   getters: {},
   mutations: {
-    changeData(state, newData) {
+    SET_DATA(state, newData) {
       state.data = newData;
     },
-    //
-    setData(state, newData) {
-      state.data = newData;
+    SET_DATE(state, { year, month }) {
+      state.year = year;
+      state.month = month;
+    },
+    ADD_SUB_ITEM(state, newData) {
+      state.sub.push(newData);
+    },
+    REMOVE_SUB_ITEM(state, ID) {
+      state.sub = state.sub.filter(el => el.ID !== ID);
+    },
+    ADD_CHANGED_PERIOD(state, params) {
+      const newData = state.period.filter(el => el.ID !== params.ID);
+      newData.push(params);
+      state.period = newData;
+    },
+    REMOVE_CHANGED_PERIOD(state, ID) {
+      state.period = state.period.filter(el => el.ID !== ID);
     }
   },
   actions: {
-    testCall({ commit, state }, payload) {
-      const { method, id } = payload;
-      this.state.data = {...cardJson};
+    async updateData({ commit, dispatch }, callback){
+      const { code, data } = await dispatch('fetchApi', {
+        method: 'GET',
+        path: 'cards',
+        query: { MONTH: `${this.state.year}${this.state.month}` }
+      });
 
-      switch (method) {
-        case 'GET' :
-          this.state.data = { ...cardJson };
-          break;
-
-        case 'DELETE' :
-          commit('changeData',
-            { ...state.data, list: state.data.list.filter(el => el.id !== id) }
-          );
-          break;
-
-        default :
-          this.state.data = { ...cardJson };
+      if(code === 200) {
+        commit('SET_DATA', data);
+        if(typeof callback === 'function') callback();
       }
-
-      return 'call'
     },
-
-
-    // origin
-    async fetchApi(context, payload){
-      const url = 'hebale.com';
-      const { method, data } = payload;
+    async fetchApi(_, { method, path, query, body }){
+      const user = window.location.search ? window.location.search.split('=')[1] : 'unknown'; 
+      const queryString = query && Object.keys(query).map(el => `${el}=${query[el]}`).join('&');
+      const url = `https://api.hebale.com/gojiri/${path}?USER=${user}${query ? '&' + queryString : ''}`;
       
       const response = await fetch(url, {
         method: method,
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(data),
-      })
+        ...(body && { body: JSON.stringify(body) }),
+      });
 
-      return response.json();
+      return await response.json();
     }
   },
   modules: {}
 })
-
-
-const cardJson = [
-  {
-    id: 'id-1234567890',
-    name: '테스트 카드이름',
-    visible: true,
-    createDt: null,
-    updateDt: null,
-    list: [
-      {
-        id: 0,
-        name: '테스트 카드이름1',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 1,
-        name: '테스트 카드이름2',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 2,
-        name: '테스트 카드이름3',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 3,
-        name: '테스트 카드이름4',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 4,
-        name: '테스트 카드이름5',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      }
-    ]
-  },
-  {
-    id: 'id-1234567899',
-    name: '테스트 카드이름1',
-    visible: true,
-    createDt: null,
-    updateDt: null,
-    list: [
-      {
-        id: 0,
-        name: '테스트 카드이름11',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 1,
-        name: '테스트 카드이름22',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 2,
-        name: '테스트 카드이름33',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 3,
-        name: '테스트 카드이름44',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      },
-      {
-        id: 4,
-        name: '테스트 카드이름55',
-        repeat: false,
-        period: 0,
-        amount: 0, 
-        createDt: null,
-        updateDt: null
-      }
-    ]
-  }
-]

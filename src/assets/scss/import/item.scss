@@ -1,0 +1,226 @@
+.gojiri {
+  .card {
+    .inner {
+      ul {
+        padding-top: 14px;
+        li {
+          position: relative;
+          padding-left: 32px;
+          padding-right: 78px;
+          transition: padding linear 350ms;
+          > label {
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 4px;
+            height: 16px;
+            vertical-align: middle;
+            transform: translateY(-50%);
+            input {
+              position: absolute;
+            }
+            span {
+              position: relative;
+              top: 0;
+              left: 0;
+              width: 16px;
+              height: 16px;
+              transform: none;
+              &:before {
+                width: 7px;
+                transform: translate(-8px, 3px) rotate(45deg);
+              }
+              &:after {
+                width: 11px;
+                transform: translate(-13px, 3px) rotate(135deg);
+              }
+            }
+          }
+          .list {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 6px 10px 6px 8px;
+            align-items: center;
+            border-radius: 6px;
+            background: #23271f;
+            transition: padding linear 350ms;
+            &:after {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+            }
+            input:not([type="radio"]) {
+              padding: 0 4px;
+              border: 1px solid #23271f;
+              color: #fff;
+              box-sizing: border-box;
+            }
+            .title-input {
+              margin-bottom: 5px;
+              width: 100%;
+              font-size: 12px;
+            }
+            .period-type {
+              padding-left: 4px;
+              font-size: 12px;
+            }
+            .period {
+              padding-left: 4px;
+              margin-top: 4px;
+              font-size: 12px;
+              text-align: left;
+            }
+            .amount {
+              margin-left: auto;
+              text-align: right;
+              span {
+                display: inline-block;
+                margin-top: -2px;
+                font-size: 12px;
+                vertical-align: middle;
+              }
+              input {
+                width: 100px;
+                text-align: right;
+              }
+            }
+            > div {
+              width: 100%;
+              text-align: center;
+            }
+            .setting {
+              display: flex;
+              width: 100%;
+              padding: 0 3px;
+              margin-top: 10px;
+              font-size: 12px;
+              justify-content: space-between;
+              box-sizing: border-box;
+              & + button {
+                padding: 4px 0;
+                margin-top: 14px;
+                width: 100%;
+                border-radius: 2px;
+                font-size: 12px;
+                font-weight: 500;
+                text-align: center;
+                color: #0c1012;
+                background: #b4e900;
+                span {
+                  padding: 0 4px;
+                }
+              }
+            }
+          }
+          .control {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            right:0;
+            margin-left: auto;
+            width: 78px;
+            box-sizing: border-box;
+            transform: translateY(-50%);
+            .modify-btn,
+            .cancel-btn {
+              padding: 2px 4px;
+              margin-right: 4px;
+              border-radius: 2px;
+              font-size: 12px;
+              font-weight: 600;
+              color: #303030;
+              background: #b4e900;
+              white-space: nowrap;
+            }
+            
+            .delete-btn {
+              text-indent: -9999px;
+              position: relative;
+              width: 32px;
+              height: 26px;
+              border: none;
+              overflow: hidden;
+              &:before,
+              &:after {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 18px;
+                height: 2px;
+                border-radius: 2px;
+                background: #b4e900;
+                transform-origin: 50% 50%;
+              }
+              &:before {
+                transform: translate(-50%, -50%) rotate(-45deg);
+              }
+              &:after {
+                transform: translate(-50%, -50%) rotate(45deg);
+              }
+            }
+          }
+          & + li {
+            margin-top: 12px;  
+          }
+          &.edit .list,
+          &.sub .list {
+            &:after {
+              display: none;
+            }
+            input {
+              color: #fff;
+              background: #0c1012;
+              border-color: #0c1012;
+            }
+          }
+
+          &.sub {
+            padding: 0;
+            .list {
+              padding-left: 42px;
+              padding-right: 90px;
+            }
+          }
+          
+        }
+      }
+      > button {
+        text-indent: -9999px;
+        position: relative;
+        display: block;
+        padding: 0;
+        margin: 12px auto 0;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        &:before,
+        &:after {
+          content: '';
+          display: inline-block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          height: 1px;
+          width: 12px;
+          transform-origin: 50% 50%;
+          background: #b4e900;
+        }
+        &:before {
+          transform: translate(-50%, -50%);
+        }
+        &:after {
+          transform: translate(-50%, -50%) rotate(90deg);
+        }
+      }
+    }
+  }
+}
