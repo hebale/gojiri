@@ -1,26 +1,16 @@
+<script setup lang="ts">
+import '@/assets/scss/style.scss'
 
-<script>
-  import FlickHeader from './layout/FlickHeader.vue';
-  import ContentsBody from './layout/ContentsBody.vue';
+import HeaderArea from '@/layout/HeaderArea.vue'
+import BodyArea from '@/layout/BodyArea.vue'
+import ModalArea from '@/layout/ModalArea.vue'
 
-  export default {
-    components: {
-      FlickHeader,
-      ContentsBody
-    },
-    mounted(){
-      // this.$nextTick(() => console.log('loaded'))
-    }
-  }
 </script>
 
 <template>
   <main class="gojiri">
-    <flick-header />
-    <contents-body />
+    <HeaderArea />
+    <BodyArea />
+    <ModalArea />
   </main>
 </template>
-
-<style lang='sass'>
-@import './assets/scss/style.scss'
-</style>

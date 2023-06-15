@@ -5,14 +5,13 @@
         padding-top: 14px;
         li {
           position: relative;
-          padding-left: 32px;
-          padding-right: 78px;
+          padding-left: 30px;
           transition: padding linear 350ms;
           > label {
             display: inline-block;
             position: absolute;
             top: 50%;
-            left: 4px;
+            left: 6px;
             height: 16px;
             vertical-align: middle;
             transform: translateY(-50%);
@@ -36,47 +35,76 @@
               }
             }
           }
-          .list {
+          // > label.complete ~ .input {
+          //   &:before {
+          //     content: 'Complete';
+          //     z-index: 10;
+          //     display: inline-flex;
+          //     position: absolute;
+          //     justify-content: center;
+          //     align-items: center;
+          //     top: 0;
+          //     left: 0;
+          //     right: 0;
+          //     bottom: 0;
+          //     color: #0c1012;
+          //     font-size: 16px;
+          //     font-weight: 500;
+          //     color: #b4e900;
+          //     border: 2px solid #b4e900;
+          //     border-radius: 10px;
+          //     // background: #b4e90099;
+          //     background: #0c101299;
+          //   }
+          // }
+          .input {
             position: relative;
             display: flex;
             flex-wrap: wrap;
-            padding: 6px 10px 6px 8px;
+            padding: 8px 86px 8px 8px;
             align-items: center;
-            border-radius: 6px;
+            border-radius: 10px;
             background: #23271f;
             transition: padding linear 350ms;
+            overflow: hidden;
             &:after {
-              content: "";
+              content: '';
               position: absolute;
               top: 0;
               left: 0;
               right: 0;
               bottom: 0;
             }
-            input:not([type="radio"]) {
-              padding: 0 4px;
+            input:not([type='radio']) {
+              padding: 0;
               border: 1px solid #23271f;
               color: #fff;
               box-sizing: border-box;
             }
+            .group {
+              display: flex;
+              align-items: flex-end;
+              justify-content: space-between;
+              + .group {
+                margin-top: 6px;
+              }
+            }
             .title-input {
-              margin-bottom: 5px;
               width: 100%;
+              height: 20px;
               font-size: 12px;
             }
             .period-type {
-              padding-left: 4px;
               font-size: 12px;
             }
             .period {
-              padding-left: 4px;
-              margin-top: 4px;
               font-size: 12px;
               text-align: left;
             }
             .amount {
-              margin-left: auto;
+              margin-left: 4px;
               text-align: right;
+              white-space: nowrap;
               span {
                 display: inline-block;
                 margin-top: -2px;
@@ -84,8 +112,13 @@
                 vertical-align: middle;
               }
               input {
-                width: 100px;
+                margin-left: auto;
+                width: 70px;
+                height: 20px;
                 text-align: right;
+                &::placeholder {
+                  font-size: 12px;
+                }
               }
             }
             > div {
@@ -95,24 +128,22 @@
             .setting {
               display: flex;
               width: 100%;
-              padding-left: 4px;
-              margin-top: 10px;
               font-size: 11px;
               justify-content: space-between;
               box-sizing: border-box;
-              & + button {
-                padding: 4px 0;
-                margin-top: 14px;
-                width: 100%;
-                border-radius: 2px;
-                font-size: 12px;
-                font-weight: 500;
-                text-align: center;
-                color: #0c1012;
-                background: #b4e900;
-                span {
-                  padding: 0 4px;
-                }
+            }
+            .date-btn {
+              padding: 2px 0;
+              margin-top: 4px;
+              width: 100%;
+              border-radius: 4px;
+              font-size: 12px;
+              font-weight: 500;
+              text-align: center;
+              color: #0c1012;
+              background: #b4e900;
+              span {
+                padding: 0 4px;
               }
             }
           }
@@ -122,56 +153,58 @@
             align-items: center;
             position: absolute;
             top: 50%;
-            right:0;
+            right: 4px;
             margin-left: auto;
-            width: 78px;
-            box-sizing: border-box;
+            width: 74px;
             transform: translateY(-50%);
-            .modify-btn,
-            .cancel-btn {
-              padding: 2px 4px;
-              margin-right: 4px;
-              border-radius: 2px;
-              font-size: 12px;
-              font-weight: 600;
-              color: #303030;
+            box-sizing: border-box;
+            &:before {
+              content: '';
+              display: block;
+              position: absolute;
+              top: 50%;
+              left: 0;
+              width: 1px;
+              height: 20px;
               background: #b4e900;
-              white-space: nowrap;
+              opacity: 0.6;
+              transform: translateY(-50%);
             }
-            
-            .delete-btn {
+            button {
               text-indent: -9999px;
               position: relative;
-              width: 32px;
+              width: 26px;
               height: 26px;
+              margin: 4px;
               border: none;
+              border-radius: 6px;
+              background-color: #b4e900;
+              background-repeat: no-repeat;
+              background-position: center;
               overflow: hidden;
-              &:before,
-              &:after {
-                content: '';
-                display: inline-block;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 18px;
-                height: 2px;
-                border-radius: 2px;
-                background: #b4e900;
-                transform-origin: 50% 50%;
-              }
-              &:before {
-                transform: translate(-50%, -50%) rotate(-45deg);
-              }
-              &:after {
-                transform: translate(-50%, -50%) rotate(45deg);
-              }
+            }
+            .confirm-btn {
+              background-image: url('#{$assetPath}/images/icon_confirm_bk.svg');
+              background-size: 18px;
+            }
+            .cancel-btn {
+              background-image: url('#{$assetPath}/images/icon_cancel_bk.svg');
+              background-size: 17px;
+            }
+            .modify-btn {
+              background-image: url('#{$assetPath}/images/icon_edit_bk.svg');
+              background-size: 16px;
+            }
+            .delete-btn {
+              background-image: url('#{$assetPath}/images/icon_delete_bk.svg');
+              background-size: 20px;
             }
           }
           & + li {
-            margin-top: 12px;  
+            margin-top: 12px;
           }
-          &.edit .list,
-          &.sub .list {
+          &.edit .input,
+          &.clone .input {
             &:after {
               display: none;
             }
@@ -182,14 +215,12 @@
             }
           }
 
-          &.sub {
+          &.clone {
             padding: 0;
-            .list {
-              padding-left: 42px;
-              padding-right: 90px;
+            .input {
+              padding-left: 38px;
             }
           }
-          
         }
       }
       > button {

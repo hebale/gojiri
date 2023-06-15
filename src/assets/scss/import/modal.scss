@@ -6,6 +6,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    background: #0c1012aa;
     .modal {
       display: flex;
       flex-direction: column;
@@ -18,47 +19,83 @@
       min-height: 140px;
       border-radius: 8px;
       border: 1px solid #b4e900;
-      background: rgb($PrimaryColorCode);
+      background: rgb(12 16 18);
       transform: translate(-50%, -50%);
       text-align: center;
-      .error {
-        display: inline-block;
-        padding: 12px 0;
-        width: 100%;
-        font-size: 12px;
+      box-sizing: border-box;
+      h3 {
+        position: relative;
+        padding: 14px 0 8px;
+        font-size: 14px;
         font-weight: 500;
+        margin: 0;
+        &:after {
+          content: "";
+          display: inline-block;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -1px;
+          height: 1px;
+          background-color: #b4e900;
+          opacity: 0.4;
+        }
       }
-      .body{
+      .body {
         input {
           padding: 4px 12px;
-          margin-top: 8px;
+          margin: 18px 0 4px;
           border: 1px solid #b4e900;
           font-size: 14px;
           color: #fff;
           background: #23271f;
         }
         p {
-          padding: 0 24px;
+          padding: 16px 0 12px;
+          line-height: 1.4;
           b {
             display: inline-block;
             width: 100%;
+            font-weight: 600;
+            color: #ff5b02;
+            &:before,
+            &:after {
+              content: '"';
+              padding: 0 1px;
+            }
           }
+        }
+        .error {
+          display: inline-block;
+          width: 100%;
+          font-size: 12px;
+          font-weight: 500;
+          color: #ff5b02;
         }
       }
       .control {
-        padding: 12px 24px 26px;
+        padding: 12px 0 20px;
         button {
+          padding: 4px 10px;
+          border-radius: 2px;
+          font-size: 12px;
+          font-weight: 400;
+          &:first-child {
+            font-weight: 500;
+            color: #0c1012;
+            background: #b4e900;
+          }
           & + button {
-            margin-left: 12px;
+            margin-left: 8px;
           }
         }
       }
-
       .picker-wrap {
         display: flex;
+        margin: 14px 0px 8px;
         justify-content: center;
         width: 100%;
-        [class*="-module"] {
+        [class*='-module'] {
           p {
             margin-bottom: 6px;
             font-size: 12px;
@@ -71,7 +108,7 @@
             align-items: center;
             height: 100px;
           }
-          & + [class*="-period"] {
+          & + [class*='-period'] {
             margin-left: auto;
           }
         }
@@ -103,7 +140,7 @@
           border-bottom: 1px solid #b4e900;
           transform: translateY(-50%);
         }
-        .dim-top, 
+        .dim-top,
         .dim-bottom {
           position: absolute;
           left: 0;

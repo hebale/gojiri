@@ -1,27 +1,39 @@
 .gojiri {
   > header {
+    position: relative;
     display: flex;
-    padding: 24px 0 0;    
+    width: 100%;
+    max-width: 640px;
+    padding: 32px 0 0;
     flex-direction: column;
     align-items: center;
     h1 {
-      padding: 0 0 14px;
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      padding: 2px 6px;
       margin: 0;
-      font-size: 20px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #0c1012;
+      background: #b4e900;
     }
     .year {
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 500;
     }
     .flicking-viewport {
       position: relative;
       width: 160px;
       height: 50px;
-      margin-top: 12px;
+      margin-top: 8px;
       overflow: hidden;
       ul.flicking-camera {
         width: 200px;
         white-space: nowrap;
-        li { 
+        li {
           display: inline-block;
           text-align: center;
           transform-origin: 50% 50%;
@@ -29,24 +41,38 @@
           button {
             position: relative;
             width: 50px;
-            height: 50px; 
+            height: 50px;
             border-radius: 50%;
             border: 1px solid #b4e900;
-            background-color: rgb($PrimaryColorCode);
+            background-color: rgb(12 16 18);
             color: #b4e900;
             transition: background-color 400ms, color 400ms;
+            &.incomplete {
+              &:before {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                top: 4px;
+                left: 50%;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #ff5b02;
+                transform: translate(-50%);
+              }
+            }
             span {
               position: absolute;
               top: 50%;
               left: 50%;
               transform: translate(-50%, -50%);
             }
-          } 
+          }
           &.active {
             button {
               font-weight: 600;
               background-color: #b4e900;
-              color: rgb($PrimaryColorCode);
+              color: #0c1012;
             }
           }
         }
@@ -55,11 +81,11 @@
       .next {
         text-indent: -9999px;
         z-index: 1;
-        position: absolute;        
+        position: absolute;
         top: 0;
         padding: 0;
         width: 55px;
-        height: 100%;        
+        height: 100%;
         border: none;
         background-color: rgba(0 0 0 / 0);
       }

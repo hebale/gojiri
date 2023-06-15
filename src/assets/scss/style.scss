@@ -1,13 +1,10 @@
 // color code
 $assetPath: '/src/assets';
-$PrimaryColorCode: 12 16 18;
-$SecondaryColorCode: #b4e900;
-$PointColorCode: 243 77 77;
 
 @mixin scrollbar-default {
   ::-webkit-scrollbar {
     width: 10px;
-    height: 20px
+    height: 20px;
   }
   ::-webkit-scrollbar-track {
     background-color: darkblue;

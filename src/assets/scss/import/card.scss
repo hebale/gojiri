@@ -1,14 +1,11 @@
 .gojiri {
   .card-wrap {
     position: relative;
-    padding: 28px 10px 56px;
     margin: 0 auto;
-    height: 100%;
-    max-width: 640px;
     box-sizing: border-box;
     overflow-y: scroll;
     &::-webkit-scrollbar {
-      width: 5px
+      width: 5px;
     }
     &::-webkit-scrollbar-thumb {
       background-color: rgb(180 233 0 / 0.4);
@@ -18,7 +15,7 @@
     }
     &::-webkit-scrollbar-track {
       background-color: rgba(0, 0, 0, 0);
-      border-radius: 10px
+      border-radius: 10px;
     }
   }
   .card {
@@ -27,12 +24,13 @@
     box-shadow: 6px 6px 20px -14px rgb(180 233 0 / 0.8);
     overflow: hidden;
     .inner {
-      padding: 2px 10px 14px;
+      padding: 0 6px 14px 4px;
       > header {
         position: relative;
-        padding-bottom: 2px;
+        margin: 0 2px;
+        height: 44px;
         &:after {
-          content: "";
+          content: '';
           display: inline-block;
           position: absolute;
           left: 0;
@@ -52,12 +50,26 @@
           }
         }
         h2 {
-          display: inline-flex;
+          display: inline-block;
           width: calc(100% - 80px);
-          padding: 0 16px 0 6px;
+          padding: 0 16px;
           margin: 0 auto;
           box-sizing: border-box;
-          align-items: center;
+          background: #0c1012;
+          text-align: center;
+          &.incompleted {
+            &:before {
+              content: '';
+              display: inline-block;
+              position: absolute;
+              top: 13px;
+              width: 4px;
+              height: 4px;
+              border-radius: 50%;
+              background: #ff5b02;
+              transform: translateX(-5px);
+            }
+          }
           label {
             position: relative;
             display: inline-block;
@@ -65,80 +77,63 @@
             height: 40px;
             overflow: hidden;
           }
-          input[type="checkbox"] {
-            &.indeterminate + span {
-              background: #b4e900;
-              &:after {
-                display: inline-block;
-                transform: translate(-50%, -50%);
-              }
+          p.hidden-title {
+            z-index: -1;
+            display: inline-block;
+            position: absolute;
+            font-size: 15px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+          }
+          input[type='text'] {
+            min-width: 10px;
+            max-width: calc(100% - 28px);
+            height: 24px;
+            font-size: 15px;
+            text-align: center;
+            &::placeholder {
+              font-size: 14px;
             }
           }
-          input[type="text"] {
-            flex: 1;
-            margin-right: 24px;
-          }
           button {
-            padding: 2px 8px;
+            text-indent: -9999px;
+            width: 28px;
+            height: 44px;
             margin-left: auto;
-            border-radius: 2px;
-            color: #303030;
-            background: #b4e900;
-            white-space: nowrap;
+            border: none;
+          }
+          .confirm-btn {
+            background: url('#{$assetPath}/images/icon_confirm.svg') no-repeat center 12px;
+            background-size: 19px;
+          }
+          .modify-btn {
+            background: url('#{$assetPath}/images/icon_edit.svg') no-repeat center 12px;
+            background-size: 17px;
           }
         }
         > button {
           text-indent: -9999px;
           position: relative;
           width: 40px;
-          height: 40px;
+          height: 44px;
           border: none;
           overflow: hidden;
-          &:before,
-          &:after {
-            content: '';
-            display: inline-block;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            height: 2px;
-            border-radius: 2px;
-            background: #b4e900;
-          }
         }
         .view-btn {
           float: left;
           transform-origin: 50% 50%;
           transition: transform 350ms;
-          overflow: hidden;
-          &:before,
-          &:after {
-            width: 12px;
-            transform-origin: 100% 50%;
-          }
-          &:before {
-            transform: translate(-11px, 4px) rotate(45deg);
-          }
-          &:after {
-            transform: translate(-12px, 4px) rotate(135deg);
-          }
+          background: url('#{$assetPath}/images/icon_arrow.svg') no-repeat center;
+          background-size: 16px;
           &.active {
             transform: rotate(-180deg);
           }
         }
         .delete-btn {
           float: right;
-          &:before,
-          &:after {
-            width: 22px;
-            transform-origin: 50% 50%;
-          }
-          &:before {
-            transform: translate(-50%, -50%) rotate(-45deg);
-          }
-          &:after {
-            transform: translate(-50%, -50%) rotate(45deg);
-          }
+          background: url('#{$assetPath}/images/icon_delete.svg') no-repeat center;
+          background-size: 24px;
         }
       }
     }
@@ -147,20 +142,48 @@
     }
   }
   .card-control {
+    display: flex;
+    gap: 20px;
     padding: 0 16px;
-    margin-top: 26px;
+    margin-top: 12px;
+    height: 90px;
     &.single {
       padding: 0;
+      margin-top: 26px;
+      height: 50px;
       button {
-        padding: 12px 0;
+        &:before {
+          display: inline-block;
+          margin: 0 6px 0 0;
+          vertical-align: middle;
+          background-size: 22px;
+        }
       }
     }
     button {
-      padding: 24px 0;
+      padding: 12px 0;
       width: 100%;
-      border-radius: 8px;
-      & + button {
-        margin-top: 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      &:before {
+        content: '';
+        display: block;
+        margin: 0 auto 10px;
+        width: 26px;
+        height: 26px;
+      }
+      &.add-btn {
+        &:before{
+          background: url('#{$assetPath}/images/icon_add.svg') no-repeat center;
+          background-size: 26px;
+        }
+      }
+      &.load-btn {
+        &:before {
+          background: url('#{$assetPath}/images/icon_download.svg') no-repeat center;
+          background-size: 26px;
+        }
       }
     }
   }

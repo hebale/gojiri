@@ -1,18 +1,25 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-const date = new Date().getTime();
-
 export default (({command, mode}) => {
-  const env = loadEnv(mode, process.cwd(), '');
-  console.log(command, mode/*, env*/);
-  
+  // const env = loadEnv(mode, process.cwd(), '');
+  console.log(command, mode, fileURLToPath(new URL('./src/', import.meta.url)));
+
   return defineConfig({
-    root: './',
     base: './',
+    plugins: [vue()],
+    resolve: {
+      extensions: ['.vue', '.ts'],
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
+    },
     assetsInclude: ['./src/assets'],
+    server: {
+      port: 8080,
+    },
     build: {
       outDir: './public',
       rollupOptions: {
@@ -33,12 +40,6 @@ export default (({command, mode}) => {
           chunkFileNames: `assets/js/script.min.js`,
           entryFileNames: `assets/js/script.min.js`,
         }
-      }
-    },
-    plugins: [vue()],
-    resolve: {
-      alias: {
-        '@': fileURLToPath(new URL('./src/assets', import.meta.url))
       }
     },
   });
