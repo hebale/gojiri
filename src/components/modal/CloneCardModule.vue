@@ -16,7 +16,9 @@ const formatedDates = computed(() => cardDates.value.map((date) => toDateFormat(
 
 onMounted(() => {
   updateProps('update:modelValue', {
-    isError: true,
+    cloneMonth: cardDates.value[0],
+    month: getPeriodData,
+    isError: false
   });
 });
 const changeYearMonth = (index: number) => {
@@ -25,7 +27,6 @@ const changeYearMonth = (index: number) => {
     month: getPeriodData
   });
 };
-changeYearMonth(0);
 </script>
 
 <template>
