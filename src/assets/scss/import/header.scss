@@ -7,6 +7,17 @@
     padding: 32px 0 0;
     flex-direction: column;
     align-items: center;
+    &::after {
+      z-index: 10;
+      content: '';
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -36px;
+      height: 36px;
+      background-image: linear-gradient(to bottom, rgb(12, 16, 18) 30%, rgba(12, 16, 18, 0));
+    }
     h1 {
       position: absolute;
       top: 12px;
