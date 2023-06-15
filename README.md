@@ -52,5 +52,5 @@ gojiri
 	├── types # 타입스크립트 타입
 	│   └── index.ts
 	├── App.vue
-	└── index.ts
+	└── index.js
 ```
