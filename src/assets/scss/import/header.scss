@@ -31,6 +31,32 @@
       color: #0c1012;
       background: #b4e900;
     }
+    .total-amount {
+      padding: 0 16px;
+      margin-top: 12px;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+      &:after {
+        content: '(원)';
+        padding-left: 3px;
+        font-size: 10px;
+      }
+      span {
+        font-size: 14px;
+        opacity: 0.8;
+        & + span {
+          font-size: 15px;
+          font-weight: 450;
+          opacity: 1;
+          &:before {
+            content: '/';
+            padding: 0 4px;
+            font-weight: 300;
+          }
+        }
+      }
+    }
     .year {
       font-size: 15px;
       font-weight: 500;
@@ -42,7 +68,7 @@
       margin-top: 8px;
       overflow: hidden;
       ul.flicking-camera {
-        width: 150px;
+        width: 100%;
         white-space: nowrap;
         li {
           display: inline-block;

@@ -13,6 +13,10 @@ export const useCardStore = defineStore('card-store', () => {
   const cards = ref<CardType[]>([]);
   const cardDates = ref<string[]>([]);
   const incompleted = ref<string[]>([]);
+  const validCards = computed(() => cards.value.map(card => card.ITEMS.filter(item => {
+    if (item.END_DATE === null) return true;
+    return Number(item.END_DATE) >= Number(getPeriodData.value) && Number(item.START_DATE) <= Number(getPeriodData.value)
+  })));
   const updateCards = () => {
     getCards({ MONTH: getPeriodData.value });
     totalCardsMonth();
@@ -61,6 +65,12 @@ export const useCardStore = defineStore('card-store', () => {
     patchCard,
     deleteCard,
     hasCardItem: computed(() => cards.value.length > 0),
-    getCardDates: computed(() => cardDates.value.map(date => toDateFormat(date)))
+    getCardDates: computed(() => cardDates.value.map(date => toDateFormat(date))),
+    completedAmount: computed(() =>
+      validCards.value.map(card => card.reduce((a, b) => b.COMPLETE === 'Y' ? a + b.AMOUNT : a, 0)).reduce((a, b) => a + b, 0)
+    ),
+    totalAmount: computed(() =>
+      validCards.value.map(card => card.reduce((a, b) => a + b.AMOUNT, 0)).reduce((a, b) => a + b, 0)
+    )
   };
 })

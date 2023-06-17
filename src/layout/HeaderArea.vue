@@ -6,10 +6,12 @@ import { storeToRefs } from 'pinia';
 import { useDateStore } from '@/store/useDateStore';
 import { useCardStore } from '@/store/useCardStore';
 
+import { toAmountFormat } from '@/common/util';
+
 import HorizonFlicker from '@/components/flicker/HorizonFlicker.vue';
 
 const { yearData, monthData } = storeToRefs(useDateStore());
-const { incompleted } = storeToRefs(useCardStore());
+const { incompleted, completedAmount, totalAmount } = storeToRefs(useCardStore());
 const initDate = ref<DateType>({
   year: yearData.value,
   month: monthData.value
@@ -24,5 +26,9 @@ const incompletedMonth = computed(() => incompleted.value.map(date => parseInt(d
       <a href="/gojiri/"><img src="" alt="" />GOJIRI</a>
     </h1>
     <HorizonFlicker :initDate="initDate" :incompleted="incompletedMonth" />
+    <div class="total-amount">
+      <span>{{ toAmountFormat(completedAmount) }}</span>
+      <span>{{ toAmountFormat(totalAmount) }}</span>
+    </div>
   </header>
 </template>

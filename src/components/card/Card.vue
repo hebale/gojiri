@@ -19,7 +19,7 @@ const { newCardItems } = storeToRefs(useCardItemStore());
 const { card } = toRefs(props);
 const cardItems = computed(() => card.value.ITEMS.filter(item => {
   if (item.END_DATE === null) return true;
-  return Number(item.END_DATE) >= Number(getPeriodData.value)
+  return Number(item.END_DATE) >= Number(getPeriodData.value) && Number(item.START_DATE) <= Number(getPeriodData.value)
 }));
 const isVisible = computed(() => card.value.VIEW === 'Y');
 const isIncompleted = computed(() => !cardItems.value.every(el => el.COMPLETE === 'Y'));
