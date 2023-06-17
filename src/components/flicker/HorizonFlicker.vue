@@ -21,11 +21,11 @@ const { updateCards } = useCardStore();
 const flicking = ref<HTMLUListElement & FlickerType | null>(null);
 const flickerDate = ref(initDate);
 const options: Partial<FlickingOptions> = {
+  autoInit: false,
   defaultIndex: flickerDate.value.month - 1,
   panelsPerView: 3,
   circular: true,
   noPanelStyleOverride: true,
-  preventEventsBeforeInit: true,
   align: 'center',
   duration: 350,
   preventClickOnDrag: true,
@@ -76,7 +76,7 @@ const onChanged = (index: number) => {
 
 <template>
   <p class="year">{{ flickerDate.year }}</p>
-  <Flicker v-if="monthRange.length > 0" ref="flicking" :cameraTag="'ul'" :options="options"
+  <Flicker ref="flicking" :cameraTag="'ul'" :options="options"
     @ready="({ currentTarget }) => motionTransform(currentTarget)"
     @move="({ currentTarget, direction }) => motionTransform(currentTarget, direction)"
     @changed="({ index }) => onChanged(index)">

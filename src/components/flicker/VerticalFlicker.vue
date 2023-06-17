@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import type { FlickerType } from '@/types';
 import type { FlickingOptions } from '@egjs/vue3-flicking';
+import { onMounted, ref } from 'vue';
 import Flicker from '@egjs/vue3-flicking';
 
 const { dates, onChanged, optionsProps } = defineProps<{
@@ -8,13 +9,13 @@ const { dates, onChanged, optionsProps } = defineProps<{
   onChanged: (index: number) => void
   optionsProps?: Partial<FlickingOptions>
 }>();
-
+const flicking = ref<HTMLUListElement & FlickerType | null>(null);
 const options: Partial<FlickingOptions> = {
+  autoInit: false,
   defaultIndex: 0,
   align: 'center',
   horizontal: false,
   noPanelStyleOverride: true,
-  preventEventsBeforeInit: true,
   duration: 350,
   preventClickOnDrag: true,
   ...(optionsProps && { ...optionsProps })
@@ -37,7 +38,7 @@ const motionTransform = currentTarget => {
 </script>
 
 <template>
-  <Flicker class="picker" :options="options" :cameraTag="'ul'"
+  <Flicker ref="flicking" class="picker" :options="options" :cameraTag="'ul'"
     @ready="({ currentTarget }) => motionTransform(currentTarget)"
     @move="({ currentTarget }) => motionTransform(currentTarget)" @changed="({ index }) => onChanged(index)">
     <template v-for="date in dates" :key="date">
