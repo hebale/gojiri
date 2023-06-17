@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits, computed, onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import { useDateStore } from '@/store/useDateStore';

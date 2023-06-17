@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CardItemType } from '@/types';
-import { defineProps, ref, toRefs, computed } from 'vue';
+import { ref, toRefs, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import { useDateStore } from '@/store/useDateStore';

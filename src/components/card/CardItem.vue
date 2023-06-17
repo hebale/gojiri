@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, toRefs } from 'vue';
+import { ref, toRefs } from 'vue';
 import type { CardItemType } from '@/types';
 
 import CardItemControl from '@/components/card/CardItemControl.vue';

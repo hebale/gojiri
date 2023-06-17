@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { FlickingOptions } from '@egjs/vue3-flicking'
-import { defineProps } from 'vue';
+import type { FlickingOptions } from '@egjs/vue3-flicking';
 import Flicker from '@egjs/vue3-flicking';
 
 const { dates, onChanged, optionsProps } = defineProps<{

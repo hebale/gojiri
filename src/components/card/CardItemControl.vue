@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, toRefs, computed } from 'vue';
+import { toRefs, computed } from 'vue';
 import type { CardItemType } from '@/types';
 
 import {

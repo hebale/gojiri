@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, onMounted } from 'vue';
+import { onMounted } from 'vue';
 
 const updateProps = defineEmits(['update:modelValue']);
 onMounted(() => {

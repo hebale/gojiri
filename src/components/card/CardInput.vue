@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CardType } from '@/types';
-import { defineProps, ref, computed, toRefs, onMounted } from 'vue';
+import { ref, computed, toRefs, onMounted } from 'vue';
 
 import { changeCardTitle, errorTitleNull } from '@/services/useCardService';
 

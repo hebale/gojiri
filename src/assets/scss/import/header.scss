@@ -57,6 +57,7 @@
             border: 1px solid #b4e900;
             background-color: rgb(12 16 18);
             color: #b4e900;
+            font-size: inherit;
             transition: background-color 400ms, color 400ms;
             &.incomplete {
               &:before {
@@ -76,6 +77,7 @@
               position: absolute;
               top: 50%;
               left: 50%;
+              font-size: inherit;
               transform: translate(-50%, -50%);
             }
           }
