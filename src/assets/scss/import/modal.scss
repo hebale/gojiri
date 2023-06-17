@@ -46,10 +46,12 @@
         input {
           padding: 4px 12px;
           margin: 18px 0 4px;
+          width: 180px;
           border: 1px solid #b4e900;
           font-size: 14px;
           color: #fff;
           background: #23271f;
+          box-sizing: border-box;
         }
         p {
           padding: 16px 0 12px;

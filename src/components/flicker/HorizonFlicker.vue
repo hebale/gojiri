@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DateType, FlickerType } from '@/types';
 import type { FlickingOptions } from '@egjs/vue3-flicking'
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, onMounted } from 'vue'
 import FlickingComp from '@egjs/vue3-flicking'
 
 import { useDateStore } from '@/store/useDateStore';
@@ -24,11 +24,16 @@ const options: Partial<FlickingOptions> = {
   defaultIndex: flickerDate.value.month - 1,
   panelsPerView: 3,
   circular: true,
+  noPanelStyleOverride: true,
   align: 'center',
   duration: 350,
   preventClickOnDrag: true,
   ...(optionsProps && { ...optionsProps })
 };
+
+onMounted(() => {
+
+});
 
 const motionTransform = (currentTarget, direction?) => {
   const { abs, floor, max } = Math;
@@ -37,7 +42,6 @@ const motionTransform = (currentTarget, direction?) => {
 
   currentTarget.panels.forEach((panel) => {
     const progress = abs(floor(panel.progress * 100) / 100);
-    // panel.element.querySelector('span')!.style.fontSize = `${max(fontRange[0], fontRange[1] - progress * 10)}px`;
     panel.element.style.fontSize = `${max(fontRange[0], parseInt((fontRange[1] - progress * 10).toFixed(2), 10))}px`;
     panel.element.querySelector('button')!.style.transform = `scale(${max(scaleRange[0], 1 - progress / scaleRange[1])})`
     if (progress < 0.2) {
@@ -67,6 +71,7 @@ const onChanged = (index: number) => {
   });
   updateCards();
 };
+
 </script>
 
 <template>

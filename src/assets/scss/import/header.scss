@@ -37,12 +37,12 @@
     }
     .flicking-viewport {
       position: relative;
-      width: 160px;
+      width: 150px;
       height: 50px;
       margin-top: 8px;
       overflow: hidden;
       ul.flicking-camera {
-        width: 200px;
+        width: 150px;
         white-space: nowrap;
         li {
           display: inline-block;
@@ -97,7 +97,7 @@
         position: absolute;
         top: 0;
         padding: 0;
-        width: 55px;
+        width: 50px;
         height: 100%;
         border: none;
         background-color: rgba(0 0 0 / 0);

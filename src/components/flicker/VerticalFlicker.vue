@@ -12,6 +12,7 @@ const options: Partial<FlickingOptions> = {
   defaultIndex: 0,
   align: 'center',
   horizontal: false,
+  noPanelStyleOverride: true,
   duration: 350,
   preventClickOnDrag: true,
   ...(optionsProps && { ...optionsProps })
