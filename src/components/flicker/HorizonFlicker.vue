@@ -25,6 +25,7 @@ const options: Partial<FlickingOptions> = {
   panelsPerView: 3,
   circular: true,
   noPanelStyleOverride: true,
+  preventEventsBeforeInit: true,
   align: 'center',
   duration: 350,
   preventClickOnDrag: true,
@@ -32,7 +33,7 @@ const options: Partial<FlickingOptions> = {
 };
 
 onMounted(() => {
-
+  motionTransform(flicking.value);
 });
 
 const motionTransform = (currentTarget, direction?) => {
@@ -77,7 +78,6 @@ const onChanged = (index: number) => {
 <template>
   <p class="year">{{ flickerDate.year }}</p>
   <flicking-comp ref="flicking" :cameraTag="'ul'" :options="options"
-    @ready="({ currentTarget }) => motionTransform(currentTarget)"
     @move="({ currentTarget, direction }) => motionTransform(currentTarget, direction)"
     @changed="({ index }) => onChanged(index)">
     <li v-for="(value, index) in monthRange" :key="`month_${value}`">

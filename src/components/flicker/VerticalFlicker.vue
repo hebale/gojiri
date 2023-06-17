@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import type { FlickingOptions } from '@egjs/vue3-flicking';
 import Flicker from '@egjs/vue3-flicking';
 
@@ -13,10 +14,15 @@ const options: Partial<FlickingOptions> = {
   align: 'center',
   horizontal: false,
   noPanelStyleOverride: true,
+  preventEventsBeforeInit: true,
   duration: 350,
   preventClickOnDrag: true,
   ...(optionsProps && { ...optionsProps })
 };
+
+onMounted(() => {
+  motionTransform(flicking.value);
+});
 
 const motionTransform = currentTarget => {
   currentTarget.panels.forEach(panel => {
@@ -32,7 +38,6 @@ const motionTransform = currentTarget => {
 
 <template>
   <Flicker class="picker" :options="options" :cameraTag="'ul'"
-    @ready="({ currentTarget }) => motionTransform(currentTarget)"
     @move="({ currentTarget }) => motionTransform(currentTarget)" @changed="({ index }) => onChanged(index)">
     <template v-for="date in dates" :key="date">
       <li>{{ date }}</li>
