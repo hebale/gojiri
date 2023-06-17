@@ -21,7 +21,7 @@ const options: Partial<FlickingOptions> = {
 };
 
 onMounted(() => {
-  motionTransform(flicking.value);
+  flicking.value?.init();
 });
 
 const motionTransform = currentTarget => {
@@ -38,6 +38,7 @@ const motionTransform = currentTarget => {
 
 <template>
   <Flicker class="picker" :options="options" :cameraTag="'ul'"
+    @ready="({ currentTarget }) => motionTransform(currentTarget)"
     @move="({ currentTarget }) => motionTransform(currentTarget)" @changed="({ index }) => onChanged(index)">
     <template v-for="date in dates" :key="date">
       <li>{{ date }}</li>

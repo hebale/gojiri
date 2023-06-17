@@ -33,7 +33,7 @@ const options: Partial<FlickingOptions> = {
 };
 
 onMounted(() => {
-  motionTransform(flicking.value);
+  flicking.value?.init();
 });
 
 const motionTransform = (currentTarget, direction?) => {
@@ -77,6 +77,7 @@ const onChanged = (index: number) => {
 <template>
   <p class="year">{{ flickerDate.year }}</p>
   <Flicker v-if="monthRange.length > 0" ref="flicking" :cameraTag="'ul'" :options="options"
+    @ready="({ currentTarget }) => motionTransform(currentTarget)"
     @move="({ currentTarget, direction }) => motionTransform(currentTarget, direction)"
     @changed="({ index }) => onChanged(index)">
     <li v-for="(value, index) in monthRange" :key="`month_${value}`">
