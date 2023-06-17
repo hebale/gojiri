@@ -5,7 +5,6 @@ import store from '@/store/'
 import flicking from '@egjs/vue3-flicking'
 
 const app = createApp(App)
-
 const setVh = () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);

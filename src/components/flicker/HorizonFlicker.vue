@@ -2,7 +2,7 @@
 import type { DateType, FlickerType } from '@/types';
 import type { FlickingOptions } from '@egjs/vue3-flicking'
 import { ref, toRefs, onMounted } from 'vue'
-import FlickingComp from '@egjs/vue3-flicking'
+import Flicker from '@egjs/vue3-flicking'
 
 import { useDateStore } from '@/store/useDateStore';
 import { useCardStore } from '@/store/useCardStore';
@@ -72,12 +72,11 @@ const onChanged = (index: number) => {
   });
   updateCards();
 };
-
 </script>
 
 <template>
   <p class="year">{{ flickerDate.year }}</p>
-  <flicking-comp ref="flicking" :cameraTag="'ul'" :options="options"
+  <Flicker v-if="monthRange.length > 0" ref="flicking" :cameraTag="'ul'" :options="options"
     @move="({ currentTarget, direction }) => motionTransform(currentTarget, direction)"
     @changed="({ index }) => onChanged(index)">
     <li v-for="(value, index) in monthRange" :key="`month_${value}`">
@@ -89,5 +88,5 @@ const onChanged = (index: number) => {
       <button type="button" class="prev" @click="slideToPrev">이전</button>
       <button type="button" class="next" @click="onSlideToNext">다음</button>
     </template>
-  </flicking-comp>
+  </Flicker>
 </template>
