@@ -27,7 +27,7 @@ const incompletedMonth = computed(() => incompleted.value.map(date => parseInt(d
     </h1>
     <HorizonFlicker :initDate="initDate" :incompleted="incompletedMonth" />
     <div class="total-amount">
-      <span>{{ toAmountFormat(completedAmount) }}</span>
+      <span :class="{ complete: completedAmount === totalAmount }">{{ toAmountFormat(completedAmount) }}</span>
       <span>{{ toAmountFormat(totalAmount) }}</span>
     </div>
   </header>
