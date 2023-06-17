@@ -38,8 +38,8 @@ const motionTransform = (currentTarget, direction?) => {
   currentTarget.panels.forEach((panel) => {
     const progress = abs(floor(panel.progress * 100) / 100);
     // panel.element.querySelector('span')!.style.fontSize = `${max(fontRange[0], fontRange[1] - progress * 10)}px`;
-    panel.element.style.fontSize = `${max(fontRange[0], fontRange[1] - progress * 10)}px`;
-    panel.element.style.transform = `scale(${max(scaleRange[0], 1 - progress / scaleRange[1])})`
+    panel.element.style.fontSize = `${max(fontRange[0], parseInt((fontRange[1] - progress * 10).toFixed(2), 10))}px`;
+    panel.element.querySelector('button')!.style.transform = `scale(${max(scaleRange[0], 1 - progress / scaleRange[1])})`
     if (progress < 0.2) {
       panel.element.classList.add('active')
     } else {
