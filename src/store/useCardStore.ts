@@ -10,6 +10,7 @@ import { toDateFormat } from '@/common/util';
 export const useCardStore = defineStore('card-store', () => {
   const { getPeriodData, prevMonth, nextMonth } = storeToRefs(useDateStore());
 
+  const loading = ref<boolean>(false);
   const cards = ref<CardType[]>([]);
   const cardDates = ref<string[]>([]);
   const incompleted = ref<string[]>([]);
@@ -17,6 +18,9 @@ export const useCardStore = defineStore('card-store', () => {
     if (item.END_DATE === null) return true;
     return Number(item.END_DATE) >= Number(getPeriodData.value) && Number(item.START_DATE) <= Number(getPeriodData.value)
   })));
+  const updateLoading = (bool: boolean) => {
+    loading.value = bool;
+  };
   const updateCards = () => {
     getCards({ MONTH: getPeriodData.value });
     totalCardsMonth();
@@ -25,6 +29,7 @@ export const useCardStore = defineStore('card-store', () => {
     });
   };
   const cloneCards = async (body: Partial<BodyType>) => {
+    updateLoading(true);
     const { code } = await Http.post('cards-clone-month', body);
     if (code === 200) updateCards();
   };
@@ -37,24 +42,33 @@ export const useCardStore = defineStore('card-store', () => {
     if (code === 200) cardDates.value = (<string[]>data);
   };
   const getCards = async (queries: QueryType) => {
+    updateLoading(true);
     const { code, data } = await Http.get('cards', queries);
-    if (code === 200) cards.value = data ? (<CardType[]>data) : [];
+    if (code === 200) {
+      cards.value = data ? (<CardType[]>data) : [];
+      updateLoading(false);
+    }
   };
   const postCard = async (body: Partial<BodyType>) => {
+    updateLoading(true);
     const { code } = await Http.post('cards', body);
     if (code === 200) updateCards();
   };
   const patchCard = async (body: Partial<BodyType>) => {
+    updateLoading(true);
     const { code } = await Http.patch('cards', body);
     if (code === 200) updateCards();
   };
   const deleteCard = async (body: Partial<BodyType>) => {
+    updateLoading(true);
     const { code } = await Http.delete('cards', body);
     if (code === 200) updateCards();
   };
   updateCards();
 
   return {
+    loading,
+    updateLoading,
     cards,
     cardDates,
     incompleted,

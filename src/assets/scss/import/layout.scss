@@ -127,6 +127,19 @@
     max-width: 640px;
     box-sizing: border-box;
     overflow-y: auto;
+    &.isLoading {
+      &:after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #0c1012dd url('#{$assetPath}/images/icon_loading.svg') no-repeat center 200px;
+        background-size: 50px;
+      }
+    }
     &::-webkit-scrollbar {
       width: 3px;
     }

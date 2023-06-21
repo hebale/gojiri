@@ -17,7 +17,6 @@ const initDate = ref<DateType>({
   month: monthData.value
 });
 const incompletedMonth = computed(() => incompleted.value.map(date => parseInt(date.substring(4, 6), 10) - 1));
-
 </script>
 
 <template>

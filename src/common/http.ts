@@ -101,4 +101,4 @@ const http = (): HttpMethodType => {
   }
 }
 
-export default http()
+export default http();

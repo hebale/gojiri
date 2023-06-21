@@ -6,11 +6,11 @@ import { addCard, cloneCard } from '@/services/useCardService';
 
 import Card from '@/components/card/Card.vue';
 
-const { cards, hasCardItem } = storeToRefs(useCardStore());
+const { loading, cards, hasCardItem } = storeToRefs(useCardStore());
 </script>
 
 <template>
-  <section>
+  <section :class="{ isLoading: loading }">
     <div class="card-wrap">
       <Card v-for="card in cards" :key="`card_${card.ID}`" :card="card" />
     </div>

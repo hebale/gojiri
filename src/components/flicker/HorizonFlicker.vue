@@ -2,6 +2,7 @@
 import type { DateType, FlickerType } from '@/types';
 import type { FlickingOptions } from '@egjs/vue3-flicking'
 import { ref, toRefs, onMounted } from 'vue'
+import { storeToRefs } from 'pinia';
 import Flicker from '@egjs/vue3-flicking'
 
 import { useDateStore } from '@/store/useDateStore';
@@ -16,7 +17,9 @@ const { initDate, optionsProps } = props;
 const { incompleted } = toRefs(props);
 
 const { monthRange, setPeriodData } = useDateStore();
-const { updateCards } = useCardStore();
+const cardStore = useCardStore();
+const { loading } = storeToRefs(cardStore);
+const { updateLoading, updateCards } = cardStore;
 
 const flicking = ref<HTMLUListElement & FlickerType | null>(null);
 const flickerDate = ref(initDate);
@@ -58,6 +61,7 @@ const motionTransform = (currentTarget, direction?) => {
   if (direction === 'NEXT' && flickerDate.value.month > parseInt(nowValue)) flickerDate.value.year += 1;
 
   flickerDate.value.month = parseInt(nowValue);
+  if (!loading.value) updateLoading(true);
 };
 const slideToPrev = () => {
   if (flicking.value && !flicking.value.animating) flicking.value.prev();
@@ -72,6 +76,9 @@ const onChanged = (index: number) => {
   });
   updateCards();
 };
+const onMoveEnd = () => {
+  if (loading.value) updateLoading(false);
+}
 </script>
 
 <template>
@@ -79,7 +86,7 @@ const onChanged = (index: number) => {
   <Flicker ref="flicking" :cameraTag="'ul'" :options="options"
     @ready="({ currentTarget }) => motionTransform(currentTarget)"
     @move="({ currentTarget, direction }) => motionTransform(currentTarget, direction)"
-    @changed="({ index }) => onChanged(index)">
+    @changed="({ index }) => onChanged(index)" @moveEnd="() => onMoveEnd()">
     <li v-for="(value, index) in monthRange" :key="`month_${value}`">
       <button type="button" :class="{ incomplete: incompleted!.indexOf(index) > -1 }">
         <span>{{ value }}</span>
