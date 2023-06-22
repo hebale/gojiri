@@ -42,7 +42,6 @@ export const useCardStore = defineStore('card-store', () => {
     if (code === 200) cardDates.value = (<string[]>data);
   };
   const getCards = async (queries: QueryType) => {
-    updateLoading(true);
     const { code, data } = await Http.get('cards', queries);
     if (code === 200) {
       cards.value = data ? (<CardType[]>data) : [];
@@ -50,17 +49,14 @@ export const useCardStore = defineStore('card-store', () => {
     }
   };
   const postCard = async (body: Partial<BodyType>) => {
-    updateLoading(true);
     const { code } = await Http.post('cards', body);
     if (code === 200) updateCards();
   };
   const patchCard = async (body: Partial<BodyType>) => {
-    updateLoading(true);
     const { code } = await Http.patch('cards', body);
     if (code === 200) updateCards();
   };
   const deleteCard = async (body: Partial<BodyType>) => {
-    updateLoading(true);
     const { code } = await Http.delete('cards', body);
     if (code === 200) updateCards();
   };

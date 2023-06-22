@@ -80,18 +80,8 @@
           text-align: center;
           transform-origin: 50% 50%;
           vertical-align: middle;
-          button {
-            position: relative;
-            padding: 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid #b4e900;
-            background-color: rgb(12 16 18);
-            color: #b4e900;
-            font-size: inherit;
-            transition: background-color 400ms, color 400ms;
-            &.incomplete {
+          &.incompleted {
+            button {
               &:before {
                 content: '';
                 display: inline-block;
@@ -105,6 +95,18 @@
                 transform: translate(-50%);
               }
             }
+          }
+          button {
+            position: relative;
+            padding: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #b4e900;
+            background-color: rgb(12 16 18);
+            color: #b4e900;
+            font-size: inherit;
+            transition: background-color 400ms, color 400ms;
             span {
               position: absolute;
               top: 50%;
