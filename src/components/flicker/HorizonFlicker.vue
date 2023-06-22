@@ -25,7 +25,7 @@ const options: Partial<FlickingOptions> = {
   defaultIndex: flickerDate.value.month - 1,
   panelsPerView: 3,
   circular: true,
-  renderOnlyVisible: true,
+  // renderOnlyVisible: true,
   noPanelStyleOverride: true,
   align: 'center',
   duration: 350,
