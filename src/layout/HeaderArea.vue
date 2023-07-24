@@ -22,7 +22,7 @@ const incompletedMonth = computed(() => incompleted.value.map(date => parseInt(d
 <template>
   <header>
     <h1>
-      <a href="/gojiri/"><img src="" alt="" />GOJIRI</a>
+      <a href="/project/gojiri/"><img src="" alt="" />GOJIRI</a>
     </h1>
     <HorizonFlicker :initDate="initDate" :incompleted="incompletedMonth" />
     <div class="total-amount">
